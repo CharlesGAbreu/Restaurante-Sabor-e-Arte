@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Sabor & Arte — Sistema de Pedidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container topbar-content">
+            <span class="status-badge">● Restaurante Aberto</span>
+            <button id="botao-tema" class="btn-theme" aria-label="Alternar tema">🌙 Escuro</button>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container nav-content">
+            <a href="#" class="logo">SABOR & ARTE</a>
+            <ul class="nav-links">
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#carrinho">Carrinho <span id="contador-carrinho" class="badge-count">0</span></a></li>
+                <li><a href="#gerenciamento">Gerenciar Pratos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="carousel-section">
+            <h2>Destaques do Chef</h2>
+            <div class="carousel-container">
+                <button id="carousel-prev" class="carousel-btn">‹</button>
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track" id="carousel-track"></div>
+                </div>
+                <button id="carousel-next" class="carousel-btn">›</button>
+            </div>
+        </section>
+
+        <section id="cardapio" class="section-content">
+            <header class="section-header">
+                <h2>Nosso Cardápio</h2>
+                <div class="filters" id="filtros-categoria">
+                    <button class="filter-btn active" data-filter="Todos">Todos</button>
+                    <button class="filter-btn" data-filter="Pratos">Pratos</button>
+                    <button class="filter-btn" data-filter="Bebidas">Bebidas</button>
+                    <button class="filter-btn" data-filter="Sobremesas">Sobremesas</button>
+                </div>
+            </header>
+            <div class="content-grid" id="grade-cardapio"></div>
+        </section>
+
+        <section id="carrinho" class="cart-section">
+            <h2>Carrinho de Compras</h2>
+            <div class="cart-container">
+                <div class="cart-items-list" id="lista-itens-carrinho">
+                    <p class="empty-cart">Seu carrinho está vazio.</p>
+                </div>
+                <div class="cart-summary">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="delivery-options">
+                        <label><input type="radio" name="tipoEntrega" value="retirada" checked> Retirada no Local (R$ 0,00)</label>
+                        <label><input type="radio" name="tipoEntrega" value="delivery"> Delivery (R$ 2,50)</label>
+                    </div>
+                    <div class="summary-line"><span>Subtotal:</span> <span id="subtotal-valor">R$ 0,00</span></div>
+                    <div class="summary-line"><span>Taxa de Entrega:</span> <span id="taxa-valor">R$ 0,00</span></div>
+                    <div class="summary-line total"><span>Total:</span> <span id="total-valor">R$ 0,00</span></div>
+                    
+                    <div class="checkout-form">
+                        <input type="text" id="cliente-nome" placeholder="Nome do Cliente" required>
+                        <button id="btn-finalizar" class="btn-primary" disabled>Finalizar Pedido</button>
+                        <button id="btn-limpar-carrinho" class="btn-danger-outline">Limpar Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gerenciamento" class="admin-section">
+            <h2>Gerenciamento de Pratos </h2>
+            <div class="admin-card">
+                <h3 id="admin-form-title">Cadastrar Novo Produto</h3>
+                <form id="form-produto" class="form-grid">
+                    <input type="hidden" id="produto-id">
+                    <input type="text" id="produto-nome" placeholder="Nome do Prato" required>
+                    <input type="text" id="produto-descricao" placeholder="Descrição" required>
+                    <input type="number" step="0.01" id="produto-preco" placeholder="Preço (R$)" required>
+                    <select id="produto-categoria" required>
+                        <option value="">Selecione a Categoria</option>
+                        <option value="Pratos">Pratos</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Sobremesas">Sobremesas</option>
+                    </select>
+                    <input type="text" id="produto-imagem" placeholder="URL da Imagem (ex: imagens/prato.jpg)" required>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-primary" id="btn-salvar-produto">Salvar Produto</button>
+                        <button type="button" id="btn-cancelar-edicao" class="btn-secondary escondido">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="admin-table-container">
+                <h3>Produtos Cadastrados</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-produtos-corpo"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-feedback" class="toast hidden">Ação realizada com sucesso!</div>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>© 2026 Restaurante Sabor & Arte. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
